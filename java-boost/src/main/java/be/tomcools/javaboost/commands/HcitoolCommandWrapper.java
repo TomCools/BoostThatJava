@@ -26,8 +26,10 @@ public class HcitoolCommandWrapper implements BluetoothActions {
             BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
             String line;
             while ((line = in.readLine()) != null) {
+                System.out.println("Read line: " + line);
                 sb.append(line).append(System.lineSeparator());
             }
+            System.out.println("Waiting for process.");
             pr.waitFor(scanTimeInSeconds, TimeUnit.SECONDS);
             pr.destroy();
             System.out.println("ok!");
