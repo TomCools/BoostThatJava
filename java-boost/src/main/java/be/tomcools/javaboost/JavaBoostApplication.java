@@ -21,9 +21,9 @@ public class JavaBoostApplication {
             wrapper.startKeepAlive();
             while(true) {
                 Thread.sleep(2000);
-                wrapper.motorTime(Motor.AB, 2, 100);
+                wrapper.motorAngle(Motor.AB, 360, 100);
                 Thread.sleep(2000);
-                wrapper.motorTime(Motor.AB, 2, -100);
+                wrapper.motorAngle(Motor.AB, 360, -100);
             }
         };
 		//return (String[] args) -> new HcitoolCommandWrapper().scanLowEnergyDevices();
