@@ -1,6 +1,7 @@
 package be.tomcools.javaboost;
 
 import be.tomcools.javaboost.commands.GatttoolCommandWrapper;
+import be.tomcools.javaboost.commands.HcitoolCommandWrapper;
 import be.tomcools.javaboost.commands.Motor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +17,7 @@ public class JavaBoostApplication {
 
 	@Bean
 	CommandLineRunner runOnStartup() {
-		return (String[] args) -> new GatttoolCommandWrapper().motorAngle(Motor.A,90,75);
+		//return (String[] args) -> new GatttoolCommandWrapper().motorAngle(Motor.A,90,75);
+		return (String[] args) -> new HcitoolCommandWrapper().scanLowEnergyDevices();
 	}
 }

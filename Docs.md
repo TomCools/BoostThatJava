@@ -3,7 +3,7 @@ Drive Forward Command / Vernie Backward command = 0c018139110a00069B9B647f03
 
 #Assuming Bluetooth device is hci1
 sudo hcitool lescan
-gatttool -i hci1 -b 00:16:53:A4:CD:7E --char-write-req --handle=0x0e --value=0c018139110a00069B9B647f03
+gatttool -i hci1 -b 00:16:53:A3:63:CA --char-write-req --handle=0x0e --value=0c018139110a00069B9B647f03
 
 #gatttool interactive mode
 connect 00:16:53:A3:63:CA
