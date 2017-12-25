@@ -5,9 +5,7 @@ import be.tomcools.javaboost.models.Device;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class HcitoolCommandWrapper implements BluetoothActions {
     @Override
@@ -45,8 +43,8 @@ public class HcitoolCommandWrapper implements BluetoothActions {
             }
         });
         try {
-            future.wait(3000);
-        } catch (InterruptedException e) {
+            future.get(3, TimeUnit.SECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
             throw new IllegalStateException(e);
         }
 
