@@ -5,6 +5,7 @@ import be.tomcools.javaboost.Config;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 public class GatttoolCommandWrapper {
     private CommandEncoder encoder = new CommandEncoder();
@@ -18,6 +19,20 @@ public class GatttoolCommandWrapper {
      */
     public void motorAngle(Motor port, int angle, int dutyCycle) {
         this.executeCommand(encoder.encodeMotorAngle(port, angle, dutyCycle));
+    }
+
+    public void startKeepAlive() {
+        Executors.newSingleThreadExecutor().submit((Runnable) () -> {
+            while(true) {
+                executeCommand("060001010200");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+        });
+
     }
 
     private void executeCommand(String encodedCommandHex) {
