@@ -34,6 +34,7 @@ public class GatttoolCommandWrapper {
         String command = String.format("gatttool -i %s -b %s --char-write-req --handle=%s --value=%s",
                 Config.INTERFACE, Config.DEVICE_ID, Config.HANDLE, encodedCommandHex);
         try {
+            System.out.println("Command: " + command);
             Runtime.getRuntime().exec(command);
         } catch (IOException e) {
             throw new RuntimeException(e);
