@@ -17,14 +17,14 @@ public class JavaBoostApplication {
 
 	@Bean
 	CommandLineRunner runOnStartup() {
-		return new CommandLineRunner() {
-			@Override
-			public void run(String... args) throws Exception {
-				GatttoolCommandWrapper wrapper = new GatttoolCommandWrapper();
-				wrapper.startKeepAlive();
-				wrapper.motorAngle(Motor.A, 90, 75);
-			}
-		};
+		return args -> {
+            GatttoolCommandWrapper wrapper = new GatttoolCommandWrapper();
+            wrapper.startKeepAlive();
+            while(true) {
+                Thread.sleep(2000);
+                wrapper.motorAngle(Motor.A, 90, 75);
+            }
+        };
 		//return (String[] args) -> new HcitoolCommandWrapper().scanLowEnergyDevices();
 	}
 }
