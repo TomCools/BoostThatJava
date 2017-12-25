@@ -1,7 +1,6 @@
 package be.tomcools.javaboost;
 
 import be.tomcools.javaboost.commands.GatttoolCommandWrapper;
-import be.tomcools.javaboost.commands.HcitoolCommandWrapper;
 import be.tomcools.javaboost.commands.Motor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,7 +21,9 @@ public class JavaBoostApplication {
             wrapper.startKeepAlive();
             while(true) {
                 Thread.sleep(2000);
-                wrapper.motorAngle(Motor.A, 90, 75);
+                wrapper.motorTime(Motor.AB, 2, 100);
+                Thread.sleep(2000);
+                wrapper.motorTime(Motor.AB, 2, -100);
             }
         };
 		//return (String[] args) -> new HcitoolCommandWrapper().scanLowEnergyDevices();
