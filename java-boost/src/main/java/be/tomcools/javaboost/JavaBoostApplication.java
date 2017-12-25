@@ -17,7 +17,7 @@ public class JavaBoostApplication {
 
 	@Bean
 	CommandLineRunner runOnStartup() {
-		//return (String[] args) -> new GatttoolCommandWrapper().motorAngle(Motor.A,90,75);
-		return (String[] args) -> new HcitoolCommandWrapper().scanLowEnergyDevices();
+		return (String[] args) ->  new GatttoolCommandWrapper().motorAngle(Motor.A,90,75);
+		//return (String[] args) -> new HcitoolCommandWrapper().scanLowEnergyDevices();
 	}
 }
