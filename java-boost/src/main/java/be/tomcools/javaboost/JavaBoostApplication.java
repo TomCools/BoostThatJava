@@ -38,6 +38,10 @@ public class JavaBoostApplication {
                             WRAPPER.motorAngle(Motor.A, 360, 100);
                         case "TURN RIGHT":
                             WRAPPER.motorAngle(Motor.B, 360, 100);
+                        case "FIRE":
+                            WRAPPER.motorAngle(Motor.C, 90, 100);
+                            Thread.sleep(500);
+                            WRAPPER.motorAngle(Motor.C, 90, -100);
                         default:
                             System.out.println("Invalid command...");
                     }
@@ -49,7 +53,7 @@ public class JavaBoostApplication {
 	private static void executeDirectCommand(String command) {
         String[] commandParts = command.split(",");
         if(commandParts.length != 3) {
-            System.out.println("Not valid command...");
+            System.out.println("Not valid direct command...");
         }
         Motor m = Motor.valueOf(commandParts[0]);
         int angle = Integer.parseInt(commandParts[1]);
