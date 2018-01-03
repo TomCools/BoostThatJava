@@ -7,8 +7,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
 @SpringBootApplication
 public class JavaBoostApplication {
+    private static GatttoolCommandWrapper WRAPPER = new GatttoolCommandWrapper();
 
 	public static void main(String[] args) {
 		SpringApplication.run(JavaBoostApplication.class, args);
@@ -17,15 +21,39 @@ public class JavaBoostApplication {
 	@Bean
 	CommandLineRunner runOnStartup() {
 		return args -> {
-            GatttoolCommandWrapper wrapper = new GatttoolCommandWrapper();
-            wrapper.startKeepAlive();
+            Scanner scanner = new Scanner(System.in);
+
             while(true) {
-                Thread.sleep(2000);
-                wrapper.motorAngle(Motor.AB, 360, 100);
-                Thread.sleep(2000);
-                wrapper.motorAngle(Motor.AB, 360, -100);
+                System.out.print("# ");
+                String nextLine = scanner.nextLine();
+
+                if(Pattern.matches("[ABC]*,[0-9]*,[0-9]*", nextLine)) {
+                    System.out.println("direct command");
+                    executeDirectCommand(nextLine);
+                } else {
+                    switch (nextLine) {
+                        case "FORWARD":
+                            WRAPPER.motorAngle(Motor.AB, 360, 100);
+                        case "TURN LEFT":
+                            WRAPPER.motorAngle(Motor.A, 360, 100);
+                        case "TURN RIGHT":
+                            WRAPPER.motorAngle(Motor.B, 360, 100);
+                        default:
+                            System.out.println("Invalid command...");
+                    }
+                }
             }
         };
-		//return (String[] args) -> new HcitoolCommandWrapper().scanLowEnergyDevices();
 	}
+
+	private static void executeDirectCommand(String command) {
+        String[] commandParts = command.split(",");
+        if(commandParts.length != 3) {
+            System.out.println("Not valid command...");
+        }
+        Motor m = Motor.valueOf(commandParts[0]);
+        int angle = Integer.parseInt(commandParts[1]);
+        int dutyCycle = Integer.parseInt(commandParts[2]);
+        WRAPPER.motorAngle(m,angle,dutyCycle);
+    }
 }
