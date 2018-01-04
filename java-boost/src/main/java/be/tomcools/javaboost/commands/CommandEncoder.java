@@ -68,6 +68,8 @@ public class CommandEncoder {
         return sb.toString();
     }
 
+
+
     private String toHexPrefix(int i) {
         String hexString = toHexString(i);
         return ("00" + hexString).substring(hexString.length());

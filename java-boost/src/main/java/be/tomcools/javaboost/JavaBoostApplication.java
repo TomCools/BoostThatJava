@@ -34,14 +34,18 @@ public class JavaBoostApplication {
                     switch (nextLine) {
                         case "FORWARD":
                             WRAPPER.motorAngle(Motor.AB, 360, 100);
+                            break;
                         case "TURN LEFT":
                             WRAPPER.motorAngle(Motor.A, 360, 100);
+                            break;
                         case "TURN RIGHT":
                             WRAPPER.motorAngle(Motor.B, 360, 100);
+                            break;
                         case "FIRE":
-                            WRAPPER.motorAngle(Motor.C, 90, 100);
+                            WRAPPER.motorAngle(Motor.C, 100, 100);
                             Thread.sleep(500);
-                            WRAPPER.motorAngle(Motor.C, 90, -100);
+                            WRAPPER.motorAngle(Motor.C, 100, -100);
+                            break;
                         default:
                             System.out.println("Invalid command...");
                     }
