@@ -22,6 +22,9 @@ public class JavaBoostApplication {
 	CommandLineRunner runOnStartup() {
 		return args -> {
             Scanner scanner = new Scanner(System.in);
+            System.out.print("Press Boost Button and hit enter.");
+            scanner.nextLine();
+            WRAPPER.startKeepAlive();
 
             while(true) {
                 System.out.print("# ");
