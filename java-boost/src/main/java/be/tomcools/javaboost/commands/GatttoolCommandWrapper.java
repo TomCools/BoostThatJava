@@ -13,7 +13,7 @@ public class GatttoolCommandWrapper {
     }
 
     public void motorTime(Motor port, int seconds, int dutyCycle) {
-        this.executeCommand(encoder.encodeMotorTime(port, seconds, dutyCycle));
+       // this.executeCommand(encoder.encodeMotorTime(port, seconds, dutyCycle));
     }
 
     public void startKeepAlive() {
