@@ -1,0 +1,2 @@
+###TO RUN###
+mvnw compile exec:java
