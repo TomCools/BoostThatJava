@@ -38,17 +38,20 @@ public class JavaBoostApplication {
                         case "FORWARD":
                             WRAPPER.motorAngle(Motor.AB, 360, 100);
                             break;
+                        case "BACKWARD":
+                            WRAPPER.motorAngle(Motor.AB, 360, -100);
+                            break;
                         case "TURN RIGHT":
                             WRAPPER.motorAngle(Motor.A, 360, 100);
                             break;
                         case "PIVOT RIGHT":
-                            WRAPPER.motorAngleMulti(360, 100, -100);
+                            WRAPPER.motorAngleMulti(240, 100, -100);
                             break;
                         case "TURN LEFT":
                             WRAPPER.motorAngle(Motor.B, 360, 100);
                             break;
                         case "PIVOT LEFT":
-                            WRAPPER.motorAngleMulti(360, -100, 100);
+                            WRAPPER.motorAngleMulti(240, -100, 100);
                             break;
                         case "FIRE":
                             WRAPPER.motorAngle(Motor.C, 100, 100);
