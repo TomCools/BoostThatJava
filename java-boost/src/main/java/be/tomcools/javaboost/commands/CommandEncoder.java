@@ -1,5 +1,4 @@
 package be.tomcools.javaboost.commands;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
@@ -18,19 +17,15 @@ public class CommandEncoder {
      * @param {number}        time - seconds
      * @param {number}        [dutyCycle=100] motor power percentage from `-100` to `100`. If a negative value is given
      *                        rotation is counterclockwise.
-
-    public String encodeMotorTime(Motor port, int seconds, int dutyCycle) {
-        if (port == Motor.AB) {
-            return encodeMotorTimeMulti(Motor.AB, seconds, dutyCycle);
-        }
-        return String.format("0E0081%s110B%s%s647F03", port.getCode(), toLittleEndianHex(seconds * 1000), convertDutyCycle(dutyCycle));
-
-
-    private String encodeMotorTimeMulti(Motor port, int seconds, int dutyCycle) {
-        String dutyCicles = convertDutyCycle(dutyCycle);
-        return String.format("0F0081%s110C%s%s%s647F03", port.getCode(), toLittleEndianHex(seconds * 1000), dutyCicles, dutyCicles);
+     *
+     */
+    public String encodeMotorTime(Motor port, int miliseconds, int dutyCycle) {
+        return String.format("0C0081%s1109%s%s647F03", port.getCode(), toLittleEndian(toHex(miliseconds, 4)), convertDutyCycle(dutyCycle)).toUpperCase();
     }
-    */
+
+    public String encodeMotorTimeMulti(int miliseconds, int dutyCycleA, int dutyCycleB) {
+        return String.format("0D0081%s110A%s%s%s647F03", Motor.AB.getCode(), toLittleEndian(toHex(miliseconds, 4)), convertDutyCycle(dutyCycleA), convertDutyCycle(dutyCycleB)).toUpperCase();
+    }
 
     /**
      * Turn a motor by specific angle
@@ -41,24 +36,34 @@ public class CommandEncoder {
      *                        rotation is counterclockwise.
      */
     public String encodeMotorAngle(Motor port, int angle, int dutyCycle) {
-        if (port == Motor.AB) {
-            return encodeMotorAngleMulti(Motor.AB, angle, dutyCycle);
-        }
+        validateInput(angle, dutyCycle);
         return String.format("0E0081%s110B%s%s647F03", port.getCode(), toLittleEndian(toHex(angle,8)), convertDutyCycle(dutyCycle)).toUpperCase();
     }
 
-    private String encodeMotorAngleMulti(Motor port, int angle, int dutyCycle) {
-        String dutyCicles = convertDutyCycle(dutyCycle);
-        return String.format("0F0081%s110C%s%s%s647F03", port.getCode(), toLittleEndian(toHex(angle,8)), dutyCicles, dutyCicles).toUpperCase();
+    public String encodeMotorAngleMulti(int angle, int dutyCycleA, int dutyCycleB) {
+        validateInput(angle, dutyCycleA, dutyCycleB);
+        return String.format("0F0081%s110C%s%s%s647F03", Motor.AB.getCode(), toLittleEndian(toHex(angle,8)), convertDutyCycle(dutyCycleA), convertDutyCycle(dutyCycleB)).toUpperCase();
+    }
+
+    private void validateInput(int angle, int... dutyCycles) {
+        if(angle < 0) {
+            throw new IllegalArgumentException("Angle must be within range `0 <-> 2147483647`, but was " + angle);
+        }
+        for (int dutyCycle : dutyCycles) {
+            if(dutyCycle < -100 || dutyCycle > 100) {
+                throw new IllegalArgumentException("DutyCycle must be within range `-100 <-> 100`, but was " + dutyCycle);
+            }
+        }
     }
 
     private String convertDutyCycle(int dutyCycle) {
+        int intCycle;
         if (dutyCycle >= 0) {
-            return toHex(dutyCycle,1);
+            intCycle = dutyCycle;
         } else {
-            int posCycle = Math.abs(dutyCycle);
-            return "-" + toHexString(posCycle);
+            intCycle = 255 - Math.abs(dutyCycle);
         }
+        return toHex(intCycle,2);
     }
 
     private String toLittleEndian(String hex) {
