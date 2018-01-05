@@ -12,6 +12,10 @@ public class GatttoolCommandWrapper {
         this.executeCommand(encoder.encodeMotorAngle(port, angle, dutyCycle));
     }
 
+    public void motorAngleMulti(int angle, int dutyCycleA, int dutyCycleB) {
+        this.executeCommand(encoder.encodeMotorAngleMulti(angle, dutyCycleA, dutyCycleB));
+    }
+
     public void motorTime(Motor port, int seconds, int dutyCycle) {
         // this.executeCommand(encoder.encodeMotorTime(port, seconds, dutyCycle));
     }
