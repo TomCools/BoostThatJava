@@ -1,2 +1,0 @@
-# BoostThatJava
-Java... Java... JAVA!
