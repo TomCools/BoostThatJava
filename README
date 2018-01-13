@@ -1,5 +1,0 @@
-# Lego Boost Java Library
-This library is used to control the Lego Boost from Java
-
-## TO RUN
-mvnw compile exec:java
