@@ -1,13 +1,15 @@
 package be.tomcools.javaboost.commands;
 
 import be.tomcools.javaboost.Config;
-import be.tomcools.javaboost.MainVerticle;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
 
+/**
+ * Wraps the GATTT command line tool into a Java Class.
+ */
 public class GatttoolCommandWrapper {
     private static final Logger LOG = LoggerFactory.getLogger(GatttoolCommandWrapper.class);
     private static boolean isKeepingAlive = false;
@@ -25,10 +27,18 @@ public class GatttoolCommandWrapper {
         this.executeCommand(encoder.encodeMotorTime(port, seconds, dutyCycle));
     }
 
+    public void motorTimeMulti(int miliseconds, int dutyCycleA, int dutyCycleB) {
+        this.executeCommand(encoder.encodeMotorTimeMulti(miliseconds, dutyCycleA, dutyCycleB));
+    }
+
     public boolean isIsKeepingAlive() {
         return isKeepingAlive;
     }
 
+    /**
+     * Lego boost hub will shutdown if it does not get a connection every so often.
+     * This method starts a thread to ping the connection every second.
+     */
     public void startKeepAlive() {
         Executors.newSingleThreadExecutor().submit(() -> {
             try {
@@ -44,6 +54,9 @@ public class GatttoolCommandWrapper {
 
     }
 
+    /**
+     * Executes a bluetooth command using a command line tool installed on the host os.
+     */
     private void executeCommand(String encodedCommandHex) {
         Config config = Config.getConfig();
         String command = String.format("gatttool -i %s -b %s --char-write-req --handle=%s --value=%s",

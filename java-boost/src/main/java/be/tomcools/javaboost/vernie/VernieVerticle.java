@@ -4,18 +4,23 @@ import be.tomcools.javaboost.commands.GatttoolCommandWrapper;
 import be.tomcools.javaboost.commands.Motor;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
+
+import static be.tomcools.javaboost.EventBusConstants.VERNIE;
 
 public class VernieVerticle extends AbstractVerticle {
+    private static final Logger LOG = LoggerFactory.getLogger(VernieVerticle.class);
     private static final GatttoolCommandWrapper WRAPPER = new GatttoolCommandWrapper();
 
     @Override
     public void start() throws Exception {
         super.start();
-        vertx.eventBus().consumer("VERNIE", this::executeCommand);
+        vertx.eventBus().consumer(VERNIE, this::executeCommand);
     }
 
     private void executeCommand(Message<String> tMessage) {
-        if(!WRAPPER.isIsKeepingAlive()) {
+        if (!WRAPPER.isIsKeepingAlive()) {
             WRAPPER.startKeepAlive();
         }
 
@@ -46,7 +51,7 @@ public class VernieVerticle extends AbstractVerticle {
                     WRAPPER.motorAngle(Motor.C, 100, -100);
                     break;
                 default:
-                    System.out.println("Invalid command...");
+                    LOG.warn("Invalid command...");
             }
         } catch (Exception ex) {
             tMessage.fail(0, ex.getMessage());
