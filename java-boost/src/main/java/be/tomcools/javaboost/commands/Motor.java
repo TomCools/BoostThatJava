@@ -8,7 +8,7 @@ public enum Motor {
     C("01"),
     D("02"),
     LED("32"),
-    TILT("0x3A");
+    TILT("3A");
 
     private String code;
 
