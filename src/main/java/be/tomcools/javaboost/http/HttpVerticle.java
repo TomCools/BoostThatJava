@@ -17,7 +17,7 @@ public class HttpVerticle extends AbstractVerticle {
     public void start() throws Exception {
         Router router = Router.router(vertx);
         router.exceptionHandler(throwable -> LOG.error(throwable.getCause() + ":" + throwable.getMessage()));
-        router.route(HttpMethod.GET, "/vernie/:command").handler((h) -> {
+        router.route(HttpMethod.POST, "/vernie/:command").handler((h) -> {
             vertx.eventBus().send(VERNIE, h.pathParam("command"), handler -> {
                 if (handler.succeeded()) {
                     h.response().end();

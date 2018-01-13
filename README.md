@@ -5,7 +5,7 @@ This library uses the GATTTool command line tool to invoke the bluetooth command
 As a result, this library does not work unless you have this tool installed.
 
 ## Requirements
-- Java
+- Java 8 or higher
 - A Lego Boost
 - Any OS with GATTtool command line
 
@@ -25,8 +25,19 @@ I have focussed on the Vernie Bot you can build using Lego Boost.
 - Motor A and B: "Feet" of Vernie, used to drive around with Vernie.
 - Motor C: "Head". Makes Vernie moves his head. This also allows him to fire his little rocket.
 
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+![Alt Text](https://github.com/TomCools/BoostThatJava/blob/master/static/vernie.gif)
 
 ### Running the example
+Example built using Vert.x (http://vertx.io/).
+
 Clone this git repository onto your RPI3 or equivalent and run:
-**mvnw compile exec:java**
+**mvnw compile exec:java** while keeping the button pressed on the Lego Boost Hub.
+Once connected succesfully, the led on the Boost Hub will change to a Blue Color.
+
+This example exposes a HTTP API on port 8080 _(see HttpVerticle.class)_.
+You can do:
+
+- POST /vernie/{COMMAND}: Makes vernie run a precoded command. _(see VernieVerticle.class)_
+- GET /config: Gets the configured details
+- PUT /config: Changes the configuration
+- /*: Any other endpoint returns "I'm alive" to signify the software is running

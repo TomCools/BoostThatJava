@@ -16,14 +16,11 @@ public class VernieVerticle extends AbstractVerticle {
     @Override
     public void start() throws Exception {
         super.start();
+        WRAPPER.startKeepAlive();
         vertx.eventBus().consumer(VERNIE, this::executeCommand);
     }
 
     private void executeCommand(Message<String> tMessage) {
-        if (!WRAPPER.isIsKeepingAlive()) {
-            WRAPPER.startKeepAlive();
-        }
-
         try {
             String command = tMessage.body();
             switch (command) {
