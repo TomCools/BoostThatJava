@@ -4,6 +4,10 @@ Unfortunatly, the Bluetooth support in Java isn't that great.
 This library uses the GATTTool command line tool to invoke the bluetooth commands.
 As a result, this library does not work unless you have this tool installed.
 
+<p align="center">
+<b>![Alt Text](https://github.com/TomCools/BoostThatJava/blob/master/static/vernie.gif)</b>
+</p>
+
 ## Requirements
 - Java 8 or higher
 - A Lego Boost
@@ -24,8 +28,6 @@ I found a lot of the details on how to do this here: https://github.com/JorgePe/
 I have focussed on the Vernie Bot you can build using Lego Boost. 
 - Motor A and B: "Feet" of Vernie, used to drive around with Vernie.
 - Motor C: "Head". Makes Vernie moves his head. This also allows him to fire his little rocket.
-
-![Alt Text](https://github.com/TomCools/BoostThatJava/blob/master/static/vernie.gif)
 
 ### Running the example
 Example built using Vert.x (http://vertx.io/).
