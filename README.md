@@ -4,9 +4,7 @@ Unfortunatly, the Bluetooth support in Java isn't that great.
 This library uses the GATTTool command line tool to invoke the bluetooth commands.
 As a result, this library does not work unless you have this tool installed.
 
-<p align="center">
-<b>![Alt Text](https://github.com/TomCools/BoostThatJava/blob/master/static/vernie.gif)</b>
-</p>
+![Alt Text](https://github.com/TomCools/BoostThatJava/blob/master/static/vernie.gif)
 
 ## Requirements
 - Java 8 or higher
