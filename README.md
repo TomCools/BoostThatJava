@@ -41,3 +41,7 @@ You can do:
 - GET /config: Gets the configured details
 - PUT /config: Changes the configuration
 - /*: Any other endpoint returns "I'm alive" to signify the software is running
+
+## Main Learning Resources
+https://github.com/JorgePe/BOOSTreveng  
+https://github.com/pcborenstein/bluezDoc/wiki/hcitool-and-gatttool-example  
