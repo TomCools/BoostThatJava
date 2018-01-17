@@ -11,7 +11,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 *.zip
@@ -24,8 +23,6 @@ hs_err_pid*
 .idea
 .vertx
 .mvn
-/target
-target/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
