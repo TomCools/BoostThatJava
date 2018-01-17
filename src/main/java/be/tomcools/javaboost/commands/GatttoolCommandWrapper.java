@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
 public class GatttoolCommandWrapper {
     private static final Logger LOG = LoggerFactory.getLogger(GatttoolCommandWrapper.class);
     private static boolean isKeepingAlive = false;
+    private static final int WAITINGTIME = 1000;
     private CommandEncoder encoder = new CommandEncoder();
 
     public void motorAngle(Motor port, int angle, int dutyCycle) {
@@ -63,9 +64,12 @@ public class GatttoolCommandWrapper {
                 config.getBluetoothInterface(), config.getDeviceID(), config.getHandle(), encodedCommandHex);
         try {
             Runtime.getRuntime().exec(command);
+            Thread.sleep(WAITINGTIME);
         } catch (IOException e) {
             LOG.error("Failed to execute command: " + command, e);
             throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

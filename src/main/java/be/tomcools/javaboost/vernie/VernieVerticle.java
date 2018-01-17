@@ -13,6 +13,7 @@ public class VernieVerticle extends AbstractVerticle {
     private static final Logger LOG = LoggerFactory.getLogger(VernieVerticle.class);
     private static final GatttoolCommandWrapper WRAPPER = new GatttoolCommandWrapper();
 
+
     @Override
     public void start() throws Exception {
         super.start();
@@ -38,11 +39,10 @@ public class VernieVerticle extends AbstractVerticle {
                     break;
                 case "DANCE":
                     WRAPPER.motorAngleMulti(240, 100, -100);
-                    Thread.sleep(700);
                     WRAPPER.motorAngleMulti(240, -100, 100);
-                    Thread.sleep(700);
+                    WRAPPER.motorAngleMulti(240, -100, 100);
+                    WRAPPER.motorAngleMulti(240, 100, -100);
                     WRAPPER.motorAngle(Motor.AB, 360, 20);
-                    Thread.sleep(700);
                     WRAPPER.motorAngle(Motor.AB, 360, -20);
                     break;
                 case "TURN_LEFT":
