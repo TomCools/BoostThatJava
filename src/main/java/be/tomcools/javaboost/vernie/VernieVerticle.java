@@ -51,9 +51,11 @@ public class VernieVerticle extends AbstractVerticle {
                 case "PIVOT_LEFT":
                     WRAPPER.motorAngleMulti(240, -100, 100);
                     break;
+                case "LED_RED":
+                    WRAPPER.led("9");
+                    break;
                 case "FIRE":
                     WRAPPER.motorAngle(Motor.C, 100, 100);
-                    Thread.sleep(1000);
                     WRAPPER.motorAngle(Motor.C, 100, -100);
                     break;
                 default:

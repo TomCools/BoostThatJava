@@ -45,6 +45,16 @@ public class CommandEncoder {
     }
 
     /**
+     * Change the color of the led.
+     *
+     * @param ledColor The color which will be sended to the LED.
+     * @return The formated command.
+     */
+    public String changeLed(String ledColor) {
+        return String.format("080081321151000%s", ledColor).toUpperCase();
+    }
+
+    /**
      * Turn A and B motor by an angle at 2 different speeds
      *
      * @param angle      angle - degrees to turn from `0` to `2147483647`

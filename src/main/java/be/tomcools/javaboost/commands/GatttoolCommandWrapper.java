@@ -32,6 +32,10 @@ public class GatttoolCommandWrapper {
         this.executeCommand(encoder.encodeMotorTimeMulti(miliseconds, dutyCycleA, dutyCycleB));
     }
 
+    public void led(String colour) {
+        this.executeCommand(encoder.changeLed(colour));
+    }
+
     public boolean isIsKeepingAlive() {
         return isKeepingAlive;
     }
