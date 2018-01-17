@@ -23,7 +23,6 @@ hs_err_pid*
 .idea
 .vertx
 .mvn
-!.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
 .apt_generated
@@ -41,7 +40,6 @@ hs_err_pid*
 
 ### NetBeans ###
 nbproject/private/
-build/
 nbbuild/
 dist/
 nbdist/
