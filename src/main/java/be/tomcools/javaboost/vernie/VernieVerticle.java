@@ -30,16 +30,16 @@ public class VernieVerticle extends AbstractVerticle {
                 case "BACKWARD":
                     WRAPPER.motorAngle(Motor.AB, 360, -100);
                     break;
-                case "TURN RIGHT":
+                case "TURN_RIGHT":
                     WRAPPER.motorAngle(Motor.A, 360, 100);
                     break;
-                case "PIVOT RIGHT":
+                case "PIVOT_RIGHT":
                     WRAPPER.motorAngleMulti(240, 100, -100);
                     break;
-                case "TURN LEFT":
+                case "TURN_LEFT":
                     WRAPPER.motorAngle(Motor.B, 360, 100);
                     break;
-                case "PIVOT LEFT":
+                case "PIVOT_LEFT":
                     WRAPPER.motorAngleMulti(240, -100, 100);
                     break;
                 case "FIRE":
